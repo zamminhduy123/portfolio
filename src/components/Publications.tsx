@@ -43,7 +43,7 @@ export function Publications() {
                     {pub.title}
                   </h3>
                   {pub.featured && (
-                    <span className="px-2 py-1 bg-[#E11D48] text-white text-[10px] md:text-xs rounded uppercase tracking-wider shrink-0">
+                    <span className="px-2 py-1 bg-[#E11D48] text-white text-[10px] md:text-xs rounded uppercase tracking-wider spublhrink-0">
                       Featured
                     </span>
                   )}

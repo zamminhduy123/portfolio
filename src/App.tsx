@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
-import { About } from './components/About';
+import { About } from './components/About2';
 import { Projects } from './components/Projects';
-import { Experience } from './components/Experience';
-import { Publications } from './components/Publications';
+import { Experiences } from './components/Experience2';
+import { Publications } from './components/Publications2';
 import { Skills } from './components/Skills';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
@@ -39,7 +39,7 @@ export default function App() {
           <Hero />
           <About />
           <Projects />
-          <Experience />
+          <Experiences />
           <Publications />
           <Skills />
           <Contact />
