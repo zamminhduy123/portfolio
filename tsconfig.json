@@ -24,6 +24,6 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "scripts/db-sync.mjs", "tailwind.config.js"],
+  "include": ["src", "next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "scripts/db-sync.mjs", "tailwind.config.js"],
   "exclude": ["node_modules"]
 }

@@ -137,7 +137,7 @@ export function Hero() {
           </div>
 
           {/* Social Links */}
-          <div className="flex items-center gap-3 md:gap-4 pt-4">
+          <div className="flex items-center gap-3 md:gap-4 pt-4">hero
             <a
                href={SOCIAL_LINKS.github}
               target="_blank"

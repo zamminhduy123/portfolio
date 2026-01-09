@@ -1,54 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { FileText, Quote, Code, Sparkles, ExternalLink, ArrowUpRight, Zap } from "lucide-react";
-
-interface Publication {
-  id: string;
-  title: string;
-  venue: string;
-  year: number;
-  authors: string[];
-  first: boolean;
-  vibes: string;
-  links: {
-    pdf?: string;
-    bibtex?: string;
-    code?: string;
-  };
-}
-
-const publications: Publication[] = [
-  {
-    id: "1",
-    title: "Multi-Class Intrusion Detection System for In-Vehicle Networks Using Few-Shot Learning and Convolutional Anomaly Transformer Network",
-    venue: "Knowledge Based Systems Journal",
-    year: 2025,
-    authors: ["Nguyen T. M. Duy", "H. B. T. Huy", "P. Van Phu", "T. D. Le", "D. Kim."],
-    first: true,
-    vibes: "hmmm this one idk :))",
-    links: { pdf: "https://doi.org/10.1016/j.knosys.2025.114436" }
-  },
-  {
-    id: "2",
-    title: "Open-Set Recognition with Multi-Objective Graph Neural Network in Controller Area Networks",
-    venue: "Submitted to IEEE Transactions",
-    year: 2025,
-    authors:  ["Nguyen T. M. Duy", "D. Kim", "et al."],
-    first: true,
-    vibes: "just a submission for now but hoping for the best",
-    links: { pdf: "#" }
-  },
-  {
-    id: "3",
-    title: "Advanced deep learning-based electricity theft detection in smart grids using multi-dimensional analysis with Convolutional Autoencoder and Transformer",
-    venue: "Engineering Applications of Artificial Intelligence Journal",
-    year: 2024,
-    authors: ["T. D. Le", "N. T. M. Duy", "H. B. T. Huy", "P. Van Phu", "H. T. Doan", "D. Kim."],
-    first: false,
-    vibes: "lowkey just helped with the model training",
-    links: { pdf: "https://doi.org/10.1016/j.engappai.2025.111333", bibtex: "#" }
-  },
-];
+import { PUBLICATIONS, type Publication } from "@/const/publications";
 
 function PublicationCard({ pub, index }: { pub: Publication; index: number }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -189,11 +142,11 @@ function PublicationCard({ pub, index }: { pub: Publication; index: number }) {
 }
 
 export function Publications() {
-  const firstCount = publications.filter(p => p.first).length;
+  const firstCount = PUBLICATIONS.filter(p => p.first).length;
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
+      <div className="max-w-7xl mx-auto px-6 md:px-20 py-16 md:py-32">
         <motion.header 
           className="mb-12"
           initial={{ opacity: 0, y: 20 }}
@@ -218,7 +171,7 @@ export function Publications() {
           <p className="text-lg md:text-xl text-black/60 max-w-xl leading-relaxed">
             Papers I've shipped to the academic world. 
             <span className="text-black/40 block mt-1 font-mono text-sm">
-              ({firstCount} bangers, {publications.length - firstCount} solid contributions)
+              ({firstCount} bangers, {PUBLICATIONS.length - firstCount} solid contributions)
             </span>
           </p>
 
@@ -240,7 +193,7 @@ export function Publications() {
         </motion.header>
 
         <div className="space-y-6">
-          {publications.map((pub, index) => (
+          {PUBLICATIONS.map((pub, index) => (
             <PublicationCard key={pub.id} pub={pub} index={index} />
           ))}
         </div>

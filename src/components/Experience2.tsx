@@ -176,7 +176,7 @@ export function Experiences() {
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="max-w-5xl mx-auto px-6 py-16 md:py-24">
+      <div className="max-w-7xl mx-auto px-6 md:px-20 py-16 md:py-32">
         <motion.header 
           className="text-center mb-20"
           initial={{ opacity: 0, y: 20 }}

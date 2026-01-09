@@ -48,7 +48,7 @@ export function About() {
       </div>
 
       <motion.div 
-        className="max-w-7xl mx-auto px-6 py-20 md:py-12 relative z-10"
+        className="max-w-7xl mx-auto px-6 md:px-20 py-16 md:py-32 relative z-10"
         style={{ opacity, scale }}
       >
         {/* Header with animated reveal */}
