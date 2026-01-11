@@ -57,11 +57,16 @@ export function Header({ theme, toggleTheme }: HeaderProps) {
               {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
             </button>
 
-            <button className="hidden md:flex items-center gap-2 px-4 md:px-6 py-2 md:py-2.5 bg-[#0B0B0C] dark:bg-[#F5F5F5] text-[#F5F5F5] dark:text-[#0B0B0C] hover:bg-[#E11D48] dark:hover:bg-[#E11D48] dark:hover:text-[#F5F5F5] transition-colors text-sm rounded-lg">
+            <a
+              href="/cv.pdf"
+              target="_blank"
+              rel="noreferrer"
+              className="hidden md:flex items-center gap-2 px-4 md:px-6 py-2 md:py-2.5 bg-[#0B0B0C] dark:bg-[#F5F5F5] text-[#F5F5F5] dark:text-[#0B0B0C] hover:bg-[#E11D48] dark:hover:bg-[#E11D48] dark:hover:text-[#F5F5F5] transition-colors text-sm rounded-lg"
+            >
               <Download size={16} />
               <span className="hidden lg:inline">Download Résumé</span>
               <span className="lg:hidden">Résumé</span>
-            </button>
+            </a>
 
             {/* Mobile Menu Button */}
             <button
