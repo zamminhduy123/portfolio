@@ -191,7 +191,7 @@ export function Hero() {
               className="flex flex-wrap gap-4 mb-10"
             >
               <motion.a
-                href="/projects"
+                href="#projects"
                 whileHover={{ scale: 1.02, x: 4 }}
                 whileTap={{ scale: 0.98 }}
                 className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white rounded-xl font-medium group"
@@ -201,13 +201,13 @@ export function Hero() {
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </motion.a>
               <motion.a
-                href="#contact"
+                href="/publications"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="inline-flex items-center gap-2 px-6 py-3 border-2 border-black/10 text-black rounded-xl font-medium hover:border-black/30 transition-colors"
                 data-testid="button-contact"
               >
-                Contact
+                Publications
               </motion.a>
             </motion.div>
 

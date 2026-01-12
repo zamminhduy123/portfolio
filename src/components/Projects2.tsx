@@ -194,7 +194,7 @@ export function Projects() {
   const regularProjects = filteredProjects.filter(p => !p.featured);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white" id="projects">
       <div className="max-w-7xl mx-auto px-6 md:px-20 py-16 md:py-32">
         {/* Header */}
         <motion.header 
@@ -347,9 +347,9 @@ export function Projects() {
         >
           {[
             { value: "50K+", label: "Lines of Code", icon: "💻" },
-            { value: "10M+", label: "Requests/Day", icon: "⚡" },
+            { value: "400+", label: "LeetCode Problems Solved", icon: "🧩" },
             { value: "99.99%", label: "Uptime", icon: "🎯" },
-            { value: "3", label: "Publications", icon: "📄" },
+            { value: "1", label: "Publications", icon: "📄" },
           ].map((stat, i) => (
             <motion.div 
               key={stat.label}

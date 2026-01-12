@@ -3,18 +3,18 @@ import { Sparkles, Target } from "lucide-react";
 
 const coreSkills = [
   { name: "Python", level: "primary" },
-  { name: "Go", level: "primary" },
+  // { name: "Go", level: "primary" },
   { name: "TypeScript", level: "primary" },
   { name: "PyTorch", level: "primary" },
-  { name: "Kubernetes", level: "secondary" },
-  { name: "PostgreSQL", level: "secondary" },
+  // { name: "Kubernetes", level: "secondary" },
+  // { name: "PostgreSQL", level: "secondary" },
 ];
 
 const focusAreas = [
   "Model Deployment",
-  "Distributed Systems",
-  "ML Infrastructure",
-  "System Architecture",
+  "Applied ML Research",
+  "Web Development",
+  "Saas Products",
 ];
 
 export function Skills() {
@@ -120,8 +120,8 @@ export function Skills() {
             Current Focus
           </p>
           <p className="text-black/70 leading-relaxed">
-            Exploring efficient model serving at scale, LLM fine-tuning strategies, 
-            and building robust ML infrastructure that bridges research and production.
+            Applied machine learning research and model deployment, building
+            scalable SaaS products, and enhancing web development skills.
           </p>
         </motion.section>
 
@@ -133,7 +133,7 @@ export function Skills() {
           transition={{ delay: 0.9 }}
         >
           <p className="font-mono text-sm text-black/30">
-            always learning something new
+            leveling up every day.
           </p>
         </motion.footer>
       </div>
