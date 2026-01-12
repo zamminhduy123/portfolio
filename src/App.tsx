@@ -6,7 +6,7 @@ import { CustomCursor } from '@/components/CustomCursor';
 import { GrainTexture } from '@/components/GrainTexture';
 
 import HomePage from '@/pages/HomePage';
-import PublicationsPage from '@/pages/PublicationsPage';
+import ResearchScroll from '@/pages/PublicationsPage';
 
 export default function App() {
   const [theme, setTheme] = useState<"light" | "dark">("light");
@@ -19,7 +19,7 @@ export default function App() {
 
   return (
     <div className={theme === "dark" ? "dark" : ""}>
-      <div className="min-h-screen bg-white dark:bg-[#0B0B0C] text-[#0B0B0C] dark:text-[#F5F5F5] transition-colors duration-300 overflow-x-hidden">
+      <div className="min-h-screen bg-white dark:bg-[#0B0B0C] text-[#0B0B0C] dark:text-[#F5F5F5] transition-colors duration-300 relative flex flex-col">
         <div className="hidden md:block">
           <CustomCursor />
         </div>
@@ -29,7 +29,7 @@ export default function App() {
 
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/publications" element={<PublicationsPage />} />
+          <Route path="/publications" element={<ResearchScroll />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
 

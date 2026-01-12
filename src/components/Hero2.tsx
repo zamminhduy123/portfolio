@@ -115,7 +115,7 @@ export function Hero() {
       <div className="max-w-7xl mx-auto px-6 md:px-20 relative overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center min-h-[80vh]">
           {/* Left content */}
-          <div>
+          <div className="mt-32 md:mt-0">
             {/* Intro line */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}

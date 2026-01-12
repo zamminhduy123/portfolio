@@ -10,8 +10,8 @@ const skills = [
 
 const funFacts = [
   { icon: "🇻🇳", label: "LOCATION", value: "Ho Chi Minh City, Vietnam" },
-  { icon: "🔬", label: "INTERESTS", value: "ML Infrastructure, Systems Design" },
-  { icon: "📧", label: "EMAIL", value: "ntmduy123@gmail.com.com" },
+  { icon: "⛹🏻‍♂️", label: "INTERESTS", value: "ML Research, Software Development" },
+  { icon: "📧", label: "EMAIL", value: "ntmduy123@gmail.com" },
 ];
 
 const floatingWords = ["curious", "builder", "researcher", "caffeinated", "optimistic"];

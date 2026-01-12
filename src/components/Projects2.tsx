@@ -345,12 +345,12 @@ export function Projects() {
           viewport={{ once: true }}
           transition={{ delay: 0.5 }}
         >
-          {[
-            { value: "50K+", label: "Lines of Code", icon: "💻" },
-            { value: "400+", label: "LeetCode Problems Solved", icon: "🧩" },
-            { value: "99.99%", label: "Uptime", icon: "🎯" },
-            { value: "1", label: "Publications", icon: "📄" },
-          ].map((stat, i) => (
+            {[
+            { value: "12+", label: "Projects Shipped", icon: "🚀" },
+            { value: "1000+", label: "Git Commits", icon: "📦" },
+            { value: "3+", label: "Years Coding", icon: "⏳" },
+            { value: "∞", label: "Learning", icon: "🧠" },
+            ].map((stat, i) => (
             <motion.div 
               key={stat.label}
               className="text-center"
@@ -363,7 +363,7 @@ export function Projects() {
               <div className="text-2xl md:text-3xl font-bold text-white">{stat.value}</div>
               <div className="text-xs font-mono text-white/50">{stat.label}</div>
             </motion.div>
-          ))}
+            ))}
         </motion.div>
 
         {/* Footer */}
