@@ -1,13 +1,15 @@
-import { motion, useMotionValue, useTransform, animate } from "framer-motion";
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { ArrowRight, Github, Linkedin, BookOpen, Terminal, Sparkles, Code2 } from "lucide-react";
-import { NAME, EMAIL, SOCIAL_LINKS } from "@/const/my-info";
+import { ArrowRight, Github, Linkedin, GraduationCap, Terminal, Sparkles, Code2, Facebook } from "lucide-react";
+import { NAME, SOCIAL_LINKS } from "@/const/my-info";
 
-const socialLinks = [
-  { icon: Github, href: "#", label: "GitHub" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: BookOpen, href: "#", label: "Blog" },
-];
+const social_icon = (icon : string) => {
+  if (icon === "github") return Github;
+  if (icon === "linkedin") return Linkedin;
+  if (icon === "googleScholar") return GraduationCap;
+  if (icon === "facebook") return Facebook;
+  return GraduationCap; 
+}
 
 const roles = ["Software Engineer", "ML Researcher", "Body Builder"];
 
@@ -221,20 +223,24 @@ export function Hero() {
               <span className="font-mono text-xs text-black/30 uppercase tracking-wider">
                 find me
               </span>
-              {socialLinks.map((social, i) => (
-                <motion.a
-                  key={social.label}
-                  href={social.href}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 2.1 + i * 0.1 }}
-                  whileHover={{ scale: 1.2, y: -2 }}
-                  className="w-10 h-10 rounded-xl bg-black/5 flex items-center justify-center text-black/50 hover:text-black hover:bg-black/10 transition-colors"
-                  data-testid={`link-${social.label.toLowerCase()}`}
-                >
-                  <social.icon className="w-5 h-5" />
-                </motion.a>
-              ))}
+              {Object.keys(SOCIAL_LINKS).map((key, i) => {
+                const Icon = social_icon(key);
+                return (
+                  <motion.a
+                    key={key}
+                    //@ts-ignore
+                    href={SOCIAL_LINKS[key]}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 2.1 + i * 0.1 }}
+                    whileHover={{ scale: 1.2, y: -2 }}
+                    className="w-10 h-10 rounded-xl bg-black/5 flex items-center justify-center text-black/50 hover:text-black hover:bg-black/10 transition-colors"
+                    data-testid={`link-${key.toLowerCase()}`}
+                  >
+                    <Icon className="w-5 h-5" />
+                  </motion.a>
+                );
+              })}
             </motion.div>
           </div>
 
