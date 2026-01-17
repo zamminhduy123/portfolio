@@ -263,7 +263,7 @@ export function Hero() {
                 <div className="w-72 h-96 md:w-80 md:h-105 bg-linear-to-br from-gray-100 to-gray-200 flex items-center justify-center">
                   <img
                     src={
-                      "https://scontent-nrt1-2.xx.fbcdn.net/v/t39.30808-6/483997449_24110687841853199_7216295891009470189_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=KPzCXz3zaecQ7kNvwHbOAns&_nc_oc=AdnzSNbG9mJMx838fz_I620HKq6bLgw0XpvnKdfYjIB87G404u5BBAJOHmcp3cybt9U&_nc_zt=23&_nc_ht=scontent-nrt1-2.xx&_nc_gid=AmxmsDmO7IvCwqoGr5A5Bg&oh=00_AfoNbXdOu3tFmtknfTJ-kucAOx1xyUJo64POhS6xZ1ElkQ&oe=69643827"
+                      "/me.webp"
                     }
                     alt={`${NAME} profile photo`}
                     className="w-full h-full object-cover"
