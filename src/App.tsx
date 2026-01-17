@@ -7,15 +7,23 @@ import { GrainTexture } from '@/components/GrainTexture';
 
 import HomePage from '@/pages/HomePage';
 import ResearchScroll from '@/pages/PublicationsPage';
+import { pageview } from "./ga";
+import { useLocation } from "react-router-dom";
 
 export default function App() {
   const [theme, setTheme] = useState<"light" | "dark">("light");
 
   const toggleTheme = () => setTheme(theme === "light" ? "dark" : "light");
+  const location = useLocation();
 
   useEffect(() => {
     document.documentElement.style.scrollBehavior = "smooth";
   }, []);
+
+
+  useEffect(() => {
+    pageview(location.pathname + location.search);
+  }, [location]);
 
   return (
     <div className={theme === "dark" ? "dark" : ""}>
