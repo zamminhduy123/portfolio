@@ -26,7 +26,12 @@ export function Header({ theme, toggleTheme }: HeaderProps) {
       <div className="max-w-7xl mx-auto px-6 md:px-20">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link to="/" className="text-lg md:text-xl tracking-tight font-medium">
+          <Link to="/" className="flex items-center gap-3 text-lg md:text-xl tracking-tight font-medium">
+            <img 
+              src="/icon.ico" 
+              alt="Logo" 
+              className="w-8 h-8 md:w-10 md:h-10 rounded-lg object-cover"
+            />
             {NAME}
           </Link>
 

@@ -7,7 +7,12 @@ const coreSkills = [
   { name: "TypeScript", level: "primary" },
   { name: "PyTorch", level: "primary" },
   // { name: "Kubernetes", level: "secondary" },
-  // { name: "PostgreSQL", level: "secondary" },
+  { name: "PostgreSQL", level: "secondary" },
+  { name: "Docker", level: "secondary" },
+  { name: "FastAPI", level: "secondary" },
+  { name: "React", level: "primary" },
+  { name: "Node.js", level: "secondary" },
+  { name: "TensorFlow", level: "secondary" },
 ];
 
 const focusAreas = [

@@ -66,7 +66,7 @@ export const PROJECTS: Project[] = [
       "ElectronJS",
     ],
     metrics: [],
-    featured: true,
+    featured: false,
     emoji: "💬",
     links: {
       caseStudy: "#",
@@ -91,6 +91,26 @@ export const PROJECTS: Project[] = [
     links: {
       caseStudy: "#",
       github: "https://github.com/zamminhduy123/dm-chat-app",
+    },
+  },
+    {
+    id: "5",
+    title: "Manga OCR WebApp",
+    description:
+      "Developed a web application that utilizes OCR technology to directly translate text on manga images, providing authors with copies of their works in different languages.",
+    category: ["swe", "aiml"],
+    tech: [
+      "OCR",
+      "React",
+      "FastAPI",
+      "Tesseract",
+    ],
+    metrics: [],
+    featured: true,
+    emoji: "⛩️",
+    links: {
+      caseStudy: "#",
+      github: "#",
     },
   },
 ];

@@ -137,8 +137,8 @@ function ProjectCard({ project, index, isFeatured }: { project: Project; index: 
           ))}
         </div>
 
-        {/* Links */}
-        <div className="flex gap-4">
+        {/* Links (always at bottom) */}
+        <div className="mt-auto flex gap-4 pt-4">
             {project.links.github && (
                 <motion.a
                     href={project.links.github}
