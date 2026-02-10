@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, Github, Zap, ArrowUpRight } from "lucide-react";
+import { ExternalLink, Github, Zap, ArrowUpRight, MousePointerClick } from "lucide-react";
 
 import {
   PROJECTS,
@@ -8,9 +8,10 @@ import {
   type Project,
   type ProjectCategory,
 } from "@/const/projects";
+import { ProjectDetailModal } from "@/components/ProjectDetailModal";
 
 
-function ProjectCard({ project, index, isFeatured }: { project: Project; index: number; isFeatured: boolean }) {
+function ProjectCard({ project, index, isFeatured, onSelect }: { project: Project; index: number; isFeatured: boolean; onSelect: (project: Project) => void }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -26,8 +27,9 @@ function ProjectCard({ project, index, isFeatured }: { project: Project; index: 
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={() => onSelect(project)}
       className={`
-        group relative overflow-hidden rounded-3xl p-2
+        group relative overflow-hidden rounded-3xl p-2 cursor-pointer
         ${isFeatured ? 'md:col-span-1' : ''}
       `}
       data-testid={`card-project-${project.id}`}
@@ -178,6 +180,28 @@ function ProjectCard({ project, index, isFeatured }: { project: Project; index: 
             HOT
           </motion.div>
         )}
+
+        {/* "Click to explore" hover overlay */}
+        <motion.div
+          className={`
+            absolute inset-x-0 bottom-0 flex items-center justify-center gap-2 py-3
+            pointer-events-none font-mono text-xs font-medium
+          `}
+          initial={false}
+          animate={{
+            opacity: isHovered ? 1 : 0,
+            y: isHovered ? 0 : 8,
+          }}
+          transition={{ duration: 0.25 }}
+        >
+          <motion.div
+            animate={{ y: [0, -3, 0] }}
+            transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <MousePointerClick className="w-3.5 h-3.5" />
+          </motion.div>
+          Click to explore
+        </motion.div>
       </motion.div>
     </motion.article>
   );
@@ -185,6 +209,7 @@ function ProjectCard({ project, index, isFeatured }: { project: Project; index: 
 
 export function Projects() {
   const [activeCategory, setActiveCategory] = useState<ProjectCategory>("all");
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const filteredProjects = PROJECTS.filter(
     p => activeCategory === "all" || p.category.includes(activeCategory)
@@ -311,6 +336,7 @@ export function Projects() {
                     project={project} 
                     index={i} 
                     isFeatured={true}
+                    onSelect={setSelectedProject}
                   />
                 ))}
               </AnimatePresence>
@@ -330,6 +356,7 @@ export function Projects() {
                     project={project} 
                     index={featuredProjects.length + i}
                     isFeatured={false}
+                    onSelect={setSelectedProject}
                   />
                 ))}
               </AnimatePresence>
@@ -378,6 +405,13 @@ export function Projects() {
           </p>
         </motion.footer>
       </div>
+
+      {/* Project Detail Modal */}
+      <ProjectDetailModal
+        project={selectedProject}
+        isOpen={selectedProject !== null}
+        onClose={() => setSelectedProject(null)}
+      />
     </div>
   );
 }

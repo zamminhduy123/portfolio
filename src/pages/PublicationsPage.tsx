@@ -658,7 +658,7 @@ const IntroSection = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className={`text-lg md:text-xl text-gray-500 mb-10 leading-relaxed ${FONTS.sans}`}
         >
-          Modern vehicles are computers on wheels. I research how <span className="text-red-700 font-semibold">Deep Learning</span> (Transformers) can detect anomalies in CAN Bus traffic to prevent cyberattacks.
+          Modern vehicles are computers on wheels. I research how <span className="text-red-700 font-semibold">Deep Learning</span> can detect anomalies in CAN Bus traffic to prevent cyberattacks.
         </motion.p>
       </div>
 

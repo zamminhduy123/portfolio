@@ -126,7 +126,7 @@ export function Hero() {
               className="flex items-center gap-2 mb-6"
             >
               <motion.div
-                className="ml-2 w-2 h-2 rounded-full bg-[hsl(0,84%,60%)]"
+                className="ml-2 w-2 h-2 rounded-full bg-green-500"
                 animate={{ scale: [1, 1.3, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
               />

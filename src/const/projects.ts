@@ -1,10 +1,19 @@
 export type ProjectCategory = "all" | "swe" | "aiml" | "research";
 
+export type ProjectMedia = {
+  type: "image" | "video";
+  src: string;
+  alt?: string;
+  /** When true, render as an iframe embed instead of a native <video> element */
+  useEmbed?: boolean;
+};
+
 export type Project = {
   id: string;
   title: string;
   description: string;
-  category: ProjectCategory[]; // (kept as-is to match your current component)
+  longDescription?: string;
+  category: ProjectCategory[];
   tech: string[];
   metrics: string[];
   featured: boolean;
@@ -12,7 +21,9 @@ export type Project = {
   links: {
     caseStudy?: string;
     github?: string;
+    live?: string;
   };
+  media?: ProjectMedia[];
 };
 
 /**
@@ -29,12 +40,17 @@ export const PROJECTS: Project[] = [
     title: "Interactive Video Retrieval System (HCMC AI Competition)",
     description:
       "Built a multimodal (text/image) video search system using CLIP/SigLIP embeddings + FAISS indexing, with an interactive ranked-results UI.",
+    longDescription:
+      "Developed a full-stack video retrieval system for the HCMC AI Competition. The system processes video files by extracting keyframes using TransNet, generates embeddings with CLIP/SigLIP models, and indexes them with FAISS for efficient similarity search. Users can search using natural language queries or reference images. The interactive UI presents ranked results with temporal navigation and confidence scores.",
     category: ["aiml", "swe"],
     tech: ["CLIP/SigLIP", "FAISS", "ffmpeg", "TransNet", "Vector Search"],
     metrics: [],
     featured: true,
     emoji: "🎬",
-    links: { caseStudy: "#", github: "#" },
+    links: { caseStudy: "#", github: "https://github.com/El-Psy-Kongr00/aihcm-backend" },
+    media: [{ type: "video", src: "/demo/CLIP.mp4", alt: "Demo video" },
+      { type: "image", src: "/demo/clip2.webp", alt: "Demo screenshot" }
+    ],
   },
   {
     id: "2",
@@ -72,6 +88,7 @@ export const PROJECTS: Project[] = [
       caseStudy: "#",
       github: "https://github.com/zamminhduy123/dm-chat-app",
     },
+    media: [{ type: "image", src: "/demo/dm.webp", alt: "demo image" }],
   },
   {
     id: "4",
@@ -90,8 +107,11 @@ export const PROJECTS: Project[] = [
     emoji: "💬",
     links: {
       caseStudy: "#",
-      github: "https://github.com/zamminhduy123/dm-chat-app",
+      github: "https://github.com/Sumhappy1608/IDO-platform",
     },
+    media: [{ type: "video", src: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2FDreamLauncher21%2Fvideos%2F479977666724634%2F&show_text=false&width=560&t=0", alt: "Demo video", useEmbed: true },
+      { type: "image", src: "/demo/IDO2.webp", alt: "IDO Platform screenshot" }
+    ],
   },
     {
     id: "5",
@@ -110,8 +130,11 @@ export const PROJECTS: Project[] = [
     emoji: "⛩️",
     links: {
       caseStudy: "#",
-      github: "#",
+      github: "https://github.com/darkhunterLearning/MangaAutoTranslator",
     },
+    media: [
+      { type: "image", src: "/demo/MANGA.webp", alt: "Manga OCR WebApp screenshot" }
+    ],
   },
 ];
 
