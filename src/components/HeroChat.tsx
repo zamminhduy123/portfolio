@@ -66,7 +66,7 @@ function FloatingElement({ children, delay, duration, y }: { children: React.Rea
 }
 
 export function Hero() {
-  const { messages, input, setInput, sendMessage, agentState, statusText, processHistory, isFlowing } = useAgentChat();
+  const { messages, input, setInput, sendMessage, retryConnection, agentState, statusText, processHistory, isFlowing } = useAgentChat();
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -390,22 +390,41 @@ export function Hero() {
               </div>
               
               <div className="p-3 border-t-2 border-black/5 bg-white z-10">
-                <div className="bg-black/5 rounded-xl px-4 py-2 flex items-center justify-between text-black/40 text-sm font-mono focus-within:ring-1 focus-within:ring-black/10 transition-shadow">
+                <div className={`rounded-xl px-4 py-2 flex items-center justify-between transition-all ${
+                  agentState === "offline" 
+                    ? "bg-red-50 border border-red-200" 
+                    : "bg-black/5 focus-within:ring-1 focus-within:ring-black/10"
+                }`}>
                   <input
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
+                    disabled={agentState === "offline"}
                     onKeyDown={(e) => {
                       if (e.key === "Enter" && !e.shiftKey) {
                         e.preventDefault();
                         sendMessage();
                       }
                     }}
-                    placeholder="Ask anything..."
-                    className="flex-1 bg-transparent text-black outline-none placeholder:text-black/40 h-7 text-xs"
+                    placeholder={agentState === "offline" ? "Chat disconnected..." : "Ask anything..."}
+                    className="flex-1 bg-transparent text-black outline-none placeholder:text-black/40 h-7 text-xs disabled:cursor-not-allowed"
                   />
-                  <button onClick={sendMessage} className="bg-black text-white rounded-md p-1.5 hover:bg-black/80 transition-colors ml-2 shrink-0">
-                    <ArrowRight className="w-3 h-3" />
-                  </button>
+                  {agentState === "offline" ? (
+                    <button 
+                      onClick={retryConnection}
+                      className="flex items-center gap-1.5 px-3 py-1 bg-red-500 text-white text-[10px] font-bold uppercase tracking-wider rounded-lg hover:bg-red-600 transition-colors"
+                    >
+                      <Sparkles className="w-3 h-3" />
+                      Retry
+                    </button>
+                  ) : (
+                    <button 
+                      onClick={sendMessage} 
+                      disabled={!input.trim()}
+                      className="bg-black text-white rounded-md p-1.5 hover:bg-black/80 transition-colors ml-2 shrink-0 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <ArrowRight className="w-3 h-3" />
+                    </button>
+                  )}
                 </div>
               </div>
             </motion.div>

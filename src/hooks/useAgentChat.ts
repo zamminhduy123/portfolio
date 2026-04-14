@@ -43,76 +43,95 @@ export function useAgentChat() {
   const processHistoryRef = useRef<string[]>([]);
 
   const connect = useCallback(() => {
-    if (wsRef.current && wsRef.current.readyState <= WebSocket.OPEN) return;
+    if (wsRef.current && (wsRef.current.readyState === WebSocket.OPEN || wsRef.current.readyState === WebSocket.CONNECTING)) return;
 
-    const ws = new WebSocket(WS_URL);
-    wsRef.current = ws;
+    try {
+      const ws = new WebSocket(WS_URL);
+      wsRef.current = ws;
 
-    ws.onopen = () => {
-      setAgentState("idle");
-      setStatusText("Idle");
-    };
+      ws.onopen = () => {
+        setAgentState("idle");
+        setStatusText("Idle");
+      };
 
-    ws.onmessage = (event) => {
-      try {
-        const payload = JSON.parse(event.data) as IncomingPayload;
+      ws.onmessage = (event) => {
+        try {
+          const payload = JSON.parse(event.data) as IncomingPayload;
 
-        if (payload.status) {
-          const newState = mapStatusToAgentState(payload.status);
-          setAgentState(newState);
-          setStatusText(payload.status);
+          if (payload.status) {
+            const newState = mapStatusToAgentState(payload.status);
+            setAgentState(newState);
+            setStatusText(payload.status);
 
-          if (payload.answer) {
-            const answerText = typeof payload.answer === "string" 
-              ? payload.answer 
-              : payload.answer.answer;
+            if (payload.answer) {
+              const answerText = typeof payload.answer === "string" 
+                ? payload.answer 
+                : payload.answer.answer;
 
-            const capturedSteps = [...processHistoryRef.current];
+              const capturedSteps = [...processHistoryRef.current];
 
-            setMessages((prev) => [
-              ...prev,
-              ...(capturedSteps.length > 0
-                ? [{ role: "pipeline" as const, content: "Pipeline", steps: capturedSteps }]
-                : []),
-              { role: "ai", content: answerText },
-            ]);
+              setMessages((prev) => [
+                ...prev,
+                ...(capturedSteps.length > 0
+                  ? [{ role: "pipeline" as const, content: "Pipeline", steps: capturedSteps }]
+                  : []),
+                { role: "ai", content: answerText },
+              ]);
 
-            processHistoryRef.current = [];
-            setProcessHistory([]);
-            setStatusText("Idle");
-            setAgentState("idle");
-          } else {
-            const nextHistory = [...processHistoryRef.current, payload.status];
-            processHistoryRef.current = nextHistory;
-            setProcessHistory(nextHistory);
+              processHistoryRef.current = [];
+              setProcessHistory([]);
+              setStatusText("Idle");
+              setAgentState("idle");
+            } else {
+              const nextHistory = [...processHistoryRef.current, payload.status];
+              processHistoryRef.current = nextHistory;
+              setProcessHistory(nextHistory);
+            }
+            return;
           }
-          return;
+        } catch {
+          setAgentState("processing");
+          setStatusText("Receiving updates...");
         }
-      } catch {
-        setAgentState("processing");
-        setStatusText("Receiving updates...");
-      }
-    };
+      };
 
-    ws.onerror = () => {
-      setAgentState("offline");
-      setStatusText("Backend offline");
-    };
+      ws.onerror = () => {
+        setAgentState("offline");
+        setStatusText("Backend offline");
+        wsRef.current = null;
+      };
 
-    ws.onclose = () => {
+      ws.onclose = (event) => {
+        if (!event.wasClean) {
+          setAgentState("offline");
+          setStatusText("Connection lost");
+        }
+        wsRef.current = null;
+      };
+    } catch (err) {
       setAgentState("offline");
-      setStatusText("Backend disconnected");
-    };
+      setStatusText("Failed to initialize connection");
+    }
   }, []);
 
   useEffect(() => {
     connect();
-    return () => wsRef.current?.close();
+    return () => {
+      if (wsRef.current) {
+        wsRef.current.close();
+      }
+    };
+  }, [connect]);
+
+  const retryConnection = useCallback(() => {
+    setAgentState("processing");
+    setStatusText("Retrying connection...");
+    connect();
   }, [connect]);
 
   const sendMessage = useCallback(() => {
     const trimmed = input.trim();
-    if (!trimmed) return;
+    if (!trimmed || agentState === "offline") return;
 
     setMessages((prev) => [...prev, { role: "user", content: trimmed }]);
   processHistoryRef.current = [];
@@ -148,6 +167,7 @@ export function useAgentChat() {
     input,
     setInput,
     sendMessage,
+    retryConnection,
     agentState,
     statusText,
     processHistory,
