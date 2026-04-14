@@ -22,16 +22,16 @@ export function Header({ theme, toggleTheme }: HeaderProps) {
   const linkActive = "text-[#E11D48]";
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-[#0B0B0C]/80 border-b border-[#E6E6E6] dark:border-[#222222] transition-colors duration-300">
+    <header className="sticky top-0 z-50 backdrop-blur-md bgheader-white/80 dark:bg-[#0B0B0C]/80 border-b border-[#E6E6E6] dark:border-[#222222] transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6 md:px-20">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 text-lg md:text-xl tracking-tight font-medium">
-            <img 
+            {/* <img 
               src="/icon.ico" 
               alt="Logo" 
               className="w-8 h-8 md:w-10 md:h-10 rounded-lg object-cover"
-            />
+            /> */}
             {NAME}
           </Link>
 

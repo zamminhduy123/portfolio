@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Hero } from '@/components/Hero2';
+// import { Hero } from '@/components/Hero2';
+import { Hero} from '@/components/HeroChat';
 import { About } from '@/components/About2';
 import { Projects } from '@/components/Projects2';
 import { Experiences } from '@/components/Experience2';
