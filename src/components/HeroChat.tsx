@@ -286,8 +286,9 @@ export function Hero() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.8, duration: 0.8, type: "spring" }}
-              className="w-full max-w-md bg-white border-2 border-black/10 rounded-2xl overflow-hidden shadow-2xl flex flex-col h-112 relative z-10"
+              className="w-full max-w-2xl bg-white border-2 border-black/10 rounded-2xl overflow-hidden shadow-2xl flex flex-col h-[600px] relative z-10"
             >
+              {/* Header */}
               <div className="bg-black text-white px-4 py-3 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <div className="w-6 h-6 rounded-full overflow-hidden bg-[hsl(0,84%,60%)] border border-white/20">
@@ -302,93 +303,98 @@ export function Hero() {
                 </div>
               </div>
               
-              <div className="flex-1 p-5 overflow-y-auto flex flex-col gap-4 bg-gray-50/50">
-                <AnimatePresence mode="popLayout">
-                  {messages.map((msg, idx) => (
-                    <motion.div
-                      key={idx}
-                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      className={msg.role === "user" ? "self-end bg-black text-white px-4 py-2.5 rounded-2xl rounded-tr-sm max-w-[85%] font-sans text-[14px] shadow-sm" : "self-start w-full max-w-[90%]"}
-                    >
-                      {msg.role === "user" ? (
-                        msg.content
-                      ) : msg.role === "pipeline" ? (
-                        <div className="ml-10 bg-white border-2 border-black/5 rounded-xl p-3 shadow-sm flex flex-col gap-2 font-mono">
-                          <div className="flex items-center gap-2.5 text-black/60 text-[10px]">
-                            <Sparkles className="w-3 h-3 text-[hsl(0,84%,60%)]" />
-                            <span className="text-[hsl(0,84%,60%)] uppercase tracking-tight font-bold">Pipeline</span>
-                          </div>
-                          <div className="space-y-1.5 border-l-2 border-black/5 ml-1.5 pl-3">
-                            {msg.steps?.map((step, i) => (
-                              <div key={i} className="flex items-center gap-2 group">
-                                <div className="w-1 h-1 rounded-full bg-black/20 group-last:bg-[hsl(0,84%,60%)]" />
-                                <span className="text-[10px] text-black/50 group-last:text-black/70 font-medium">{step}</span>
+              {/* Split Pane Container */}
+              <div className="flex-1 flex overflow-hidden">
+                {/* Left: Chat Messages */}
+                <div className="flex-1 p-5 overflow-y-auto flex flex-col gap-4 bg-gray-50/50 border-r border-black/5">
+                  <AnimatePresence mode="popLayout">
+                    {messages.map((msg, idx) => (
+                      msg.role !== "pipeline" && (
+                        <motion.div
+                          key={idx}
+                          initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          className={msg.role === "user" ? "self-end" : "self-start w-full"}
+                        >
+                          {msg.role === "user" ? (
+                            <div className="bg-black text-white px-4 py-2.5 rounded-2xl rounded-tr-sm max-w-[85%] font-sans text-[13px] shadow-sm">
+                              {msg.content}
+                            </div>
+                          ) : (
+                            <div className="flex gap-3 max-w-[90%]">
+                              <div className="w-7 h-7 rounded-full overflow-hidden bg-[hsl(0,84%,60%)] border-2 border-white shrink-0 mt-1 shadow-md">
+                                <img src="/me.webp" alt="Agent" className="w-full h-full object-cover" />
                               </div>
-                            ))}
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="flex gap-3">
-                          <div className="w-7 h-7 rounded-full overflow-hidden bg-[hsl(0,84%,60%)] border-2 border-black/10 shrink-0 mt-1 shadow-sm">
-                            <img src="/me.webp" alt="Agent" className="w-full h-full object-cover" />
-                          </div>
-                          <div className="bg-white border-2 border-black/10 text-black px-4 py-2.5 rounded-2xl rounded-tl-sm shadow-sm font-sans text-[14px] leading-relaxed">
-                            {msg.content}
-                          </div>
-                        </div>
-                      )}
-                    </motion.div>
-                  ))}
-
-                  {(processHistory.length > 0 || isFlowing) && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="self-start flex flex-col gap-2 w-full max-w-[90%]"
-                    >
-                      <div className="bg-white border-2 border-black/5 rounded-xl p-3 shadow-sm flex flex-col gap-2.5 font-mono">
-                        <div className="flex items-center gap-2.5 text-black/60 text-[10px]">
-                          <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 2, ease: "linear" }}>
-                            <Sparkles className="w-3 h-3 text-[hsl(0,84%,60%)]" />
-                          </motion.div>
-                          <span className="text-[hsl(0,84%,60%)] uppercase tracking-tight font-bold">Pipeline</span>
-                        </div>
-                        
-                        <div className="space-y-1.5 border-l-2 border-black/5 ml-1.5 pl-3">
-                          {processHistory.map((step, i) => (
-                            <motion.div
-                              key={i}
-                              initial={{ opacity: 0, x: -5 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ delay: i * 0.1 }}
-                              className="flex items-center gap-2 group"
-                            >
-                              <div className="w-1 h-1 rounded-full bg-black/20 group-last:bg-[hsl(0,84%,60%)] group-last:animate-pulse" />
-                              <span className="text-[10px] text-black/40 group-last:text-black/70 font-medium">
-                                {step}
-                              </span>
-                              {i === processHistory.length - 1 && (
-                                <CheckCircle2 className="w-2.5 h-2.5 text-green-500" />
-                              )}
-                            </motion.div>
-                          ))}
-                          {agentState !== "idle" && statusText && (
-                            <div className="flex items-center gap-2">
-                              <div className="w-1 h-1 rounded-full bg-[hsl(0,84%,60%)] animate-pulse" />
-                              <span className="text-[10px] text-[hsl(0,84%,60%)] animate-pulse font-bold">
-                                {statusText}...
-                              </span>
+                              <div className="bg-white border-2 border-black/10 text-black px-4 py-2.5 rounded-2xl rounded-tl-sm shadow-sm font-sans text-[13px] leading-relaxed">
+                                {msg.content}
+                              </div>
                             </div>
                           )}
-                        </div>
+                        </motion.div>
+                      )
+                    ))}
+                  </AnimatePresence>
+                  <div ref={messagesEndRef} />
+                </div>
+
+                {/* Right: Console Pipeline Viewer */}
+                <div className="w-[35%] bg-gray-950 text-green-400 p-2.5 font-mono text-[10px] overflow-y-auto flex flex-col gap-1 border-l border-black/20">
+                  <div className="text-gray-500 mb-1 text-[9px]">~ pipeline</div>
+                  
+                  {messages
+                    .filter((msg) => msg.role === "pipeline")
+                    .map((msg, idx) => (
+                      <div key={idx} className="space-y-0.5">
+                        {msg.steps?.map((step, i) => (
+                          <motion.div 
+                            key={i}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            className="text-green-400 flex items-start gap-1.5 text-[9px] leading-tight"
+                          >
+                            <span className="text-green-600 shrink-0 text-[8px]">▸</span>
+                            <span className="line-clamp-2">{step}</span>
+                          </motion.div>
+                        ))}
+                        {idx < messages.filter((m) => m.role === "pipeline").length - 1 && (
+                          <div className="text-gray-700 my-0.5 text-[8px]">---</div>
+                        )}
                       </div>
-                    </motion.div>
+                    ))}
+                  
+                  {isFlowing && (
+                    <div className="mt-2 pt-2 border-t border-gray-700">
+                      <div className="text-green-400 flex items-center gap-1.5 text-[9px]">
+                        <span>processing</span>
+                        <motion.span
+                          animate={{ opacity: [0.3, 1, 0.3] }}
+                          transition={{ repeat: Infinity, duration: 1 }}
+                          className="flex gap-0.5 text-[8px]"
+                        >
+                          <span>.</span>
+                          <span>.</span>
+                          <span>.</span>
+                        </motion.span>
+                      </div>
+                      <div className="mt-1 space-y-0.5">
+                        {processHistory.map((step, i) => (
+                          <motion.div 
+                            key={i}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            className="text-green-400 flex items-start gap-1.5 text-[9px] leading-tight"
+                          >
+                            <span className="text-green-600 shrink-0 text-[8px]">▸</span>
+                            <span className="line-clamp-2">{step}</span>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
                   )}
-                </AnimatePresence>
-                <div ref={messagesEndRef} />
+                </div>
               </div>
               
+              {/* Input Bar */}
               <div className="p-3 border-t-2 border-black/5 bg-white z-10">
                 <div className={`rounded-xl px-4 py-2 flex items-center justify-between transition-all ${
                   agentState === "offline" 
@@ -434,7 +440,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.2 }}
-              className="mt-6 w-full max-w-md p-4 rounded-xl bg-black/2 border border-black/5"
+              className="mt-6 w-full max-w-2xl p-4 rounded-xl bg-black/2 border border-black/5"
             >
               <div className="flex items-start gap-3">
                 <div className="p-1.5 rounded-lg bg-black text-white mt-0.5">
@@ -443,9 +449,8 @@ export function Hero() {
                 <div className="space-y-1.5">
                   <p className="text-xs font-semibold text-black/80">Architecture Note</p>
                   <p className="text-[11px] leading-relaxed text-black/50 font-medium">
-                    Built using <span className="text-black/70 font-semibold">Wiki-LLM</span> style inspired by Andrej Karpathy. 
-                    The agent is grounded in my private knowledge base to ensure <span className="text-black/70 font-semibold">hallucination-free</span> answers. 
-                    If the info isn't there, it simply says "I don't know".
+                    Built using <span className="text-black/70 font-semibold">Wiki-LLM</span> style inspired by Andrej Karpathy. Wiki is organized by Agent.<br />
+                    The agent is <span className="text-black/70 font-semibold">hallucination-free</span>. No vector DB or embedding model needed.
                   </p>
                 </div>
               </div>
