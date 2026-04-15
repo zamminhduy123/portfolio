@@ -20,12 +20,12 @@ const experiences: Experience[] = [
         id: "1",
         type: "education",
         title: "Master of Engineering",
-        company: "Stanford University",
-        location: "Stanford, CA",
-        period: "2018 — 2022",
+        company: "SoonChunHyang University",
+        location: "Asan, South Korea",
+        period: "Feb 2024 — Feb 2026",
         current: true,
-        description: "Thesis: Exploring the powerful Graph Neural Networks for Cybersecurity Applications. Survived on coffee and late nights.",
-        skills: ["Research", "Writing Papers", "Surviving"],
+        description: "Thesis: Exploring the powerful Graph Neural Networks and Transformer Models for Cybersecurity Applications. Survived on coffee and late nights.",
+        skills: ["Research", "Writing Papers", "Deep learning"],
         imgSrc: "https://uploaded.kcampus.kr/315936716_5905453259517294_1356613674386102687_n_af5c99ddbb.jpg"
     },
     {
@@ -34,7 +34,7 @@ const experiences: Experience[] = [
         title: "Software Engineer II",
         company: "Zalo @ VNG Corporation",
         location: "Ho Chi Minh City, Vietnam",
-        period: "2022 — March 2024",
+        period: "May 2022 — March 2024",
         current: false,
         description: "Deliver over 15+ features for Zalo PC application used by 8M+ users. Incharge of redesigning the core architecture to improve performance and maintainability of search and user related features.",
         skills: ["React", "ElectronJS", "Typescript/Javascript"],
@@ -44,12 +44,12 @@ const experiences: Experience[] = [
         id: "3",
         type: "education",
         title: "B.S. in Computer Science",
-        company: "MIT",
-        location: "Cambridge, MA",
-        period: "2014 — 2018",
+        company: "University of Science, HCMUS",
+        location: "Ho Chi Minh City, Vietnam",
+        period: "2018 — 2022",
         current: false,
         description: "Where I learned that sleep is optional and caffeine is mandatory. Minor in Mathematics.",
-        skills: ["Algorithms", "Math", "All-nighters"],
+        skills: ["Algorithms", "Data Structures", "Software Engineering"],
         imgSrc: "https://upload.wikimedia.org/wikipedia/commons/1/16/Logo-KHTN.jpg"
 
     }
