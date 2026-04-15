@@ -15,6 +15,13 @@ export function Contact() {
             </p>
           </div>
 
+          {/* Highlight Block */}
+          <div className="bg-[#E11D48]/10 dark:bg-[#E11D48]/20 border border-[#E11D48]/30 rounded-lg p-6">
+            <p className="text-lg font-medium text-[#E11D48]">
+              Got an idea but don't know how to code? Contact me to make it come true
+            </p>
+          </div>
+
           {/* Social Links */}
           <div className="flex items-center justify-center gap-4 pt-2">
             <a
