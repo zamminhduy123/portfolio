@@ -414,6 +414,10 @@ export function Hero() {
                     placeholder={agentState === "offline" ? "Chat disconnected..." : "Ask anything..."}
                     className="flex-1 bg-transparent text-black outline-none placeholder:text-black/40 h-7 text-xs disabled:cursor-not-allowed"
                   />
+                  <div className="mx-3 flex items-center gap-1.5 px-2 py-0.5 bg-black/10 border border-black/5 rounded-md">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[hsl(229,96%,65%)] animate-pulse" />
+                    <span className="text-[9px] font-bold text-black/60 tracking-wider">GEMMA4</span>
+                  </div>
                   {agentState === "offline" ? (
                     <button 
                       onClick={retryConnection}
