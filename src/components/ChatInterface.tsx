@@ -60,6 +60,12 @@ export function ChatInterface({ messages, input, setInput, onSend }: ChatInterfa
             placeholder="Ask about projects, publications, or skills..."
             className="flex-1 bg-transparent text-sm outline-none placeholder:text-black/30"
           />
+          <span
+            title="gemma4"
+            className="inline-flex items-center justify-center px-2 py-1 text-xs font-medium rounded-full bg-black/5 text-black/70 border border-black/10"
+          >
+            gemma4
+          </span>
           <button
             type="submit"
             className="inline-flex items-center gap-1 rounded-xl bg-[hsl(0,84%,60%)] px-3 py-2 text-xs font-medium text-white hover:opacity-90 transition-opacity"

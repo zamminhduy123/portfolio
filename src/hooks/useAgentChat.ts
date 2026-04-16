@@ -19,12 +19,12 @@ type IncomingPayload = StatusPayload;
 
 const INITIAL_MESSAGES: ChatMessage[] = [
   {
-    role: "ai",
-    content: "Hi! I'm Duy's AI assistant. I'm here to help you explore Duy's projects, publications, and skills. Feel free to ask me anything about this portfolio!",
-  },
-  {
     role: "pipeline",
     content: "Initial Websocket connection established. Waiting for your question...",
+  },
+  {
+    role: "ai",
+    content: "Hi! I'm Duy's AI assistant. I'm here to help you explore Duy's projects, publications, and skills. Feel free to ask me anything about this portfolio!",
   }
 ];
 
