@@ -296,10 +296,81 @@ export function Hero() {
                   </div>
                   <span className="font-medium font-mono text-xs tracking-tight">duy_agent_v1.0</span>
                 </div>
-                <div className="flex gap-1.5">
-                  <div className="w-2.5 h-2.5 rounded-full bg-red-500/20" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/20" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
+                <div className="flex items-center gap-3">
+                  <button 
+                    onClick={() => {
+                      const modal = document.createElement('div');
+                      modal.style.position = 'fixed';
+                      modal.style.inset = '0';
+                      modal.style.backgroundColor = 'rgba(0,0,0,0.8)';
+                      modal.style.zIndex = '9999';
+                      modal.style.display = 'flex';
+                      modal.style.alignItems = 'center';
+                      modal.style.justifyContent = 'center';
+                      
+                      // Create a wrapper for the iframe so we can show 80vw / 80vh
+                      const wrapper = document.createElement('div');
+                      wrapper.style.width = '80vw';
+                      wrapper.style.height = '80vh';
+                      wrapper.style.position = 'relative';
+                      wrapper.style.overflow = 'hidden';
+                      wrapper.style.borderRadius = '12px';
+                      wrapper.style.backgroundColor = '#020617';
+                      wrapper.style.display = 'flex';
+                      wrapper.style.alignItems = 'center';
+                      wrapper.style.justifyContent = 'center';
+
+                      const iframe = document.createElement('iframe');
+                      iframe.src = '/backend.html';
+                      // Inner sizing to avoid scroll
+                      iframe.style.width = '1400px';
+                      iframe.style.height = '1150px';
+                      iframe.style.position = 'absolute';
+                      
+                      // Calculate scale purely in JS since CSS scale() expects a unitless number, not a length like vw/vh
+                      const scale = Math.min((window.innerWidth * 0.8) / 1400, (window.innerHeight * 0.8) / 1150);
+                      iframe.style.transform = `scale(${scale})`;
+                      iframe.style.transformOrigin = 'center';
+                      iframe.style.border = 'none';
+
+                      // Handle resize dynamically to keep it perfectly scaled
+                      const handleResize = () => {
+                        const newScale = Math.min((window.innerWidth * 0.8) / 1400, (window.innerHeight * 0.8) / 1150);
+                        iframe.style.transform = `scale(${newScale})`;
+                      };
+                      window.addEventListener('resize', handleResize);
+                      
+                      wrapper.appendChild(iframe);
+                      
+                      const closeBtn = document.createElement('button');
+                      closeBtn.innerHTML = '×';
+                      closeBtn.style.position = 'absolute';
+                      closeBtn.style.top = '10px';
+                      closeBtn.style.right = '20px';
+                      closeBtn.style.fontSize = '32px';
+                      closeBtn.style.color = 'white';
+                      closeBtn.style.background = 'none';
+                      closeBtn.style.border = 'none';
+                      closeBtn.style.cursor = 'pointer';
+                      closeBtn.style.zIndex = '10';
+                      closeBtn.onclick = () => {
+                        window.removeEventListener('resize', handleResize);
+                        document.body.removeChild(modal);
+                      };
+                      
+                      wrapper.appendChild(closeBtn);
+                      modal.appendChild(wrapper);
+                      document.body.appendChild(modal);
+                    }}
+                    className="flex items-center gap-1.5 px-2.5 py-1 text-[10px] font-mono uppercase bg-green-700 hover:bg-green-900 border border-white/20 rounded-md transition-colors text-white"
+                  >
+                    <span>Show Architecture</span>
+                  </button>
+                  <div className="flex gap-1.5">
+                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/20" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/20" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
+                  </div>
                 </div>
               </div>
               
