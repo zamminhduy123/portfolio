@@ -67,13 +67,9 @@ function FloatingElement({ children, delay, duration, y }: { children: React.Rea
 
 export function Hero() {
   const { messages, input, setInput, sendMessage, retryConnection, agentState, statusText, processHistory, isFlowing } = useAgentChat();
+  const messageContainerRef = useRef<HTMLDivElement | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }
-  }, [messages, agentState]);
+  const pipelineContainerRef = useRef<HTMLDivElement | null>(null);
 
   const letterVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -89,6 +85,23 @@ export function Hero() {
     { icon: Linkedin, href: "https://linkedin.com/in/hzduy", label: "LinkedIn" },
     { icon: BookOpen, href: "#publications", label: "Publications" },
   ];
+
+  const handleSendMessage = () => {
+    if (isFlowing) return; // Prevent sending new messages while agent is processing
+    if (input.trim() === "") return;
+    
+    // Trigger scroll on next frame to ensure the user's message is in view
+    setTimeout(() => {
+      if (messageContainerRef.current) {
+        messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
+      }
+      if (pipelineContainerRef.current) {
+        pipelineContainerRef.current.scrollTop = pipelineContainerRef.current.scrollHeight;
+      }
+    }, 0);
+
+    sendMessage();
+  }
 
   return (
     <div className="min-h-screen bg-white overflow-hidden relative">
@@ -286,13 +299,13 @@ export function Hero() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.8, duration: 0.8, type: "spring" }}
-              className="w-full max-w-2xl bg-white border-2 border-black/10 rounded-2xl overflow-hidden shadow-2xl flex flex-col h-[600px] relative z-10"
+              className="w-full max-w-2xl bg-white border-2 border-black/10 rounded-2xl overflow-hidden shadow-2xl flex flex-col h-120 relative z-10"
             >
               {/* Header */}
-              <div className="bg-black text-white px-4 py-3 flex items-center justify-between">
+              <div className="bg-black text-white px-4 py-2 flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="w-6 h-6 rounded-full overflow-hidden bg-[hsl(0,84%,60%)] border border-white/20">
-                    <img src="/me.webp" alt="Agent" className="w-full h-full object-cover" />
+                  <div className="w-6 h-6 rounded-full overflow-hidden">
+                    <img src="/robot.webp" alt="Agent" className="w-full h-full object-cover" />
                   </div>
                   <span className="font-medium font-mono text-xs tracking-tight">duy_agent_v1.0</span>
                 </div>
@@ -366,18 +379,13 @@ export function Hero() {
                   >
                     <span>Show Architecture</span>
                   </button>
-                  <div className="flex gap-1.5">
-                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/20" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/20" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
-                  </div>
                 </div>
               </div>
               
               {/* Split Pane Container */}
-              <div className="flex-1 flex overflow-hidden">
-                {/* Left: Chat Messages */}
-                <div className="flex-1 p-5 overflow-y-auto flex flex-col gap-4 bg-gray-50/50 border-r border-black/5">
+              <div className="flex-1 flex flex-col overflow-hidden">
+                {/* Top: Chat Messages */}
+                <div className="flex-1 p-1 overflow-y-auto flex flex-col px-1 gap-2 bg-gray-50/50" ref={messageContainerRef}>
                   <AnimatePresence mode="popLayout">
                     {messages.map((msg, idx) => (
                       msg.role !== "pipeline" && (
@@ -385,18 +393,15 @@ export function Hero() {
                           key={idx}
                           initial={{ opacity: 0, y: 10, scale: 0.95 }}
                           animate={{ opacity: 1, y: 0, scale: 1 }}
-                          className={msg.role === "user" ? "self-end" : "self-start w-full"}
+                          className={"w-full flex " + (msg.role === "user" ? "justify-end" : "justify-start")}
                         >
                           {msg.role === "user" ? (
-                            <div className="bg-black text-white px-4 py-2.5 rounded-2xl rounded-tr-sm max-w-[85%] font-sans text-[13px] shadow-sm">
+                            <div className="bg-black text-white pl-2 pr-2 py-1.5 rounded-2xl rounded-tr-sm max-w-[85%] font-sans text-[13px] shadow-sm">
                               {msg.content}
                             </div>
                           ) : (
                             <div className="flex gap-3 max-w-[90%]">
-                              <div className="w-7 h-7 rounded-full overflow-hidden bg-[hsl(0,84%,60%)] border-2 border-white shrink-0 mt-1 shadow-md">
-                                <img src="/me.webp" alt="Agent" className="w-full h-full object-cover" />
-                              </div>
-                              <div className="bg-white border-2 border-black/10 text-black px-4 py-2.5 rounded-2xl rounded-tl-sm shadow-sm font-sans text-[13px] leading-relaxed">
+                              <div className="bg-white border-2 border-black/10 text-black pl-2 pr-2 py-1.5 rounded-2xl rounded-tl-sm shadow-sm font-sans text-[13px] leading-relaxed">
                                 {msg.content}
                               </div>
                             </div>
@@ -404,13 +409,30 @@ export function Hero() {
                         </motion.div>
                       )
                     ))}
+                    {isFlowing && (
+                      <motion.div
+                        key="typing-indicator"
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        className="w-full flex justify-start"
+                      >
+                        <div className="flex gap-3 max-w-[90%]">
+                          <div className="bg-white border-2 border-black/10 px-4 py-3 rounded-2xl rounded-tl-sm shadow-sm flex items-center gap-1.5">
+                            <motion.div animate={{ y: [0, -4, 0] }} transition={{ repeat: Infinity, duration: 0.6, delay: 0 }} className="w-1.5 h-1.5 bg-black/40 rounded-full" />
+                            <motion.div animate={{ y: [0, -4, 0] }} transition={{ repeat: Infinity, duration: 0.6, delay: 0.2 }} className="w-1.5 h-1.5 bg-black/40 rounded-full" />
+                            <motion.div animate={{ y: [0, -4, 0] }} transition={{ repeat: Infinity, duration: 0.6, delay: 0.4 }} className="w-1.5 h-1.5 bg-black/40 rounded-full" />
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
                   </AnimatePresence>
                   <div ref={messagesEndRef} />
                 </div>
 
-                {/* Right: Console Pipeline Viewer */}
-                <div className="w-[35%] bg-gray-950 text-green-400 p-2.5 font-mono text-[10px] overflow-y-auto flex flex-col gap-1 border-l border-black/20">
-                  <div className="text-gray-500 mb-1 text-[9px]">~ pipeline</div>
+                {/* Bottom: Console Pipeline Viewer */}
+                <div className="h-[35%] shrink-0 bg-gray-950 text-green-400 p-2.5 font-mono text-[10px] overflow-y-auto flex flex-col gap-0 border-t border-black/20" ref={pipelineContainerRef}>
+                  <div className="text-gray-500 text-[9px]">~ pipeline</div>
                   
                   {messages
                     .filter((msg) => msg.role === "pipeline")
@@ -434,7 +456,7 @@ export function Hero() {
                     ))}
                   
                   {isFlowing && (
-                    <div className="mt-2 pt-2 border-t border-gray-700">
+                    <div className="pt-1 border-t border-gray-700">
                       <div className="text-green-400 flex items-center gap-1.5 text-[9px]">
                         <span>processing</span>
                         <motion.span
@@ -479,7 +501,7 @@ export function Hero() {
                     onKeyDown={(e) => {
                       if (e.key === "Enter" && !e.shiftKey) {
                         e.preventDefault();
-                        sendMessage();
+                        handleSendMessage();
                       }
                     }}
                     placeholder={agentState === "offline" ? "Chat disconnected..." : "Ask anything..."}
@@ -499,8 +521,8 @@ export function Hero() {
                     </button>
                   ) : (
                     <button 
-                      onClick={sendMessage} 
-                      disabled={!input.trim()}
+                      onClick={handleSendMessage} 
+                      disabled={!input.trim() || isFlowing}
                       className="bg-black text-white rounded-md p-1.5 hover:bg-black/80 transition-colors ml-2 shrink-0 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <ArrowRight className="w-3 h-3" />
@@ -521,10 +543,10 @@ export function Hero() {
                 <div className="p-1.5 rounded-lg bg-black text-white mt-0.5">
                   <Bot className="w-3.5 h-3.5" />
                 </div>
-                <div className="space-y-1.5">
-                  <p className="text-xs font-semibold text-black/80">Architecture Note</p>
+                <div className="space-y-1">
+                  <p className="text-xs font-semibold text-black/80 m-0">Architecture Note</p>
                   <p className="text-[11px] leading-relaxed text-black/50 font-medium">
-                    Built using <span className="text-black/70 font-semibold">Wiki-LLM</span> style inspired by Andrej Karpathy. Wiki is organized by Agent.<br />
+                    <span className="text-black/70 font-semibold">Wiki-LLM</span> style inspired by <span className="text-black/70 font-semibold">Andrej Karpathy</span>. Wiki is organized by Agent.<br />
                     The agent is <span className="text-black/70 font-semibold">hallucination-free</span>. No vector DB or embedding model needed.
                   </p>
                 </div>
