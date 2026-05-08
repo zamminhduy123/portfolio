@@ -29,7 +29,7 @@ const certificates = [
     date: "Apr 2026",
     credentialId: "V1H36QXQRWL1",
     link: "https://coursera.org/share/05d9e3a1fb2f5d98bd4e70ef99627b96",
-    logo: <img src="https://media.licdn.com/dms/image/v2/D560BAQGiz5ecgpCtkA/company-logo_200_200/company-logo_200_200/0/1688684715866/ibm_logo?e=1776902400&v=beta&t=DdS_AmJzO8hVZJzkCH0A37Kd4MX4miZ-oSSRUJKGI-A" alt="IBM Logo" className="w-full h-full object-contain" />,
+    logo: <img src="./company/ibm.webp" alt="IBM Logo" className="w-full h-full object-contain" />,
     skills: ["RAG, LangChain, Transformer"],
   },
   {
@@ -38,7 +38,7 @@ const certificates = [
     date: "Mar 2026",
     credentialId: "KG62UL4WAIA7",
     link: "https://www.coursera.org/account/accomplishments/professional-cert/certificate/KG62UL4WAIA7",
-    logo: <img src="https://media.licdn.com/dms/image/v2/D560BAQFV-ds_iFfVSQ/company-logo_200_200/company-logo_200_200/0/1698660876286?e=1776902400&v=beta&t=2GnVrsRq1wynozhdkNYd4XPOVEkI3tphpICSOR1KhYc" alt="Google Logo" className="w-full h-full object-contain" />,
+    logo: <img src="./company/google-cloud.webp" alt="Google Logo" className="w-full h-full object-contain" />,
   },
   {
     name: "Computer Vision for Engineering and Science",
@@ -46,7 +46,7 @@ const certificates = [
     date: "Mar 2026",
     credentialId: "W8DXDYCYKQOE",
     link: "https://coursera.org/share/34eda6555fe9cae7b8b16a389688768b",
-    logo: <img src="https://media.licdn.com/dms/image/v2/C4D0BAQFSs_qwxqsJBg/company-logo_200_200/company-logo_200_200/0/1631312468202?e=1776902400&v=beta&t=D039wNMoEYQgzQSve6_4tQN74m7w2K7vqR6O3z0AAkk" alt="MathWorks Logo" className="w-full h-full object-contain" />,
+    logo: <img src="./company/mathworks.webp" alt="MathWorks Logo" className="w-full h-full object-contain" />,
     skills: ["Object Detection"],
   },
   {
@@ -55,7 +55,7 @@ const certificates = [
     date: "Mar 2026",
     credentialId: "FJWWKCUUT08Z",
     link: "https://coursera.org/share/d502160a0e86531c9b809943361f46c5",
-    logo: <img src="https://media.licdn.com/dms/image/v2/D560BAQGVn2MO4DWnLg/company-logo_200_200/B56ZbZv8i_H4AI-/0/1747409948261?e=1776902400&v=beta&t=8nBgtMzjbGg4feKeV4DgO9BrfTEMTODViDU0N2mxfG0" alt="Duke University Logo" className="w-full h-full object-contain" />,
+    logo: <img src="./company/duke.webp" alt="Duke University Logo" className="w-full h-full object-contain" />,
   },
   {
     name: "Advanced Deep Learning Techniques for Computer Vision",
@@ -63,7 +63,7 @@ const certificates = [
     date: "Mar 2026",
     credentialId: "00H4OAU2V9VI",
     link: "https://coursera.org/share/c117e21c4b502528eb110dd950ccad2d",
-    logo: <img src="https://media.licdn.com/dms/image/v2/C4D0BAQFSs_qwxqsJBg/company-logo_200_200/company-logo_200_200/0/1631312468202?e=1776902400&v=beta&t=D039wNMoEYQgzQSve6_4tQN74m7w2K7vqR6O3z0AAkk" alt="MathWorks Logo" className="w-full h-full object-contain" />,
+    logo: <img src="./company/mathworks.webp" alt="MathWorks Logo" className="w-full h-full object-contain" />,
     skills: ["Object Detection", "Anomaly Detection"],
   },
   {
@@ -72,7 +72,7 @@ const certificates = [
     date: "Mar 2026",
     credentialId: "PLACEHOLDER",
     link: "https://coursera.org/share/47e47d454e2c2360862a2a9643d610e8",
-    logo: <img src="https://media.licdn.com/dms/image/v2/C4D0BAQFSs_qwxqsJBg/company-logo_200_200/company-logo_200_200/0/1631312468202?e=1776902400&v=beta&t=D039wNMoEYQgzQSve6_4tQN74m7w2K7vqR6O3z0AAkk" alt="MathWorks Logo" className="w-full h-full object-contain" />,
+    logo: <img src="./company/mathworks.webp" alt="MathWorks Logo" className="w-full h-full object-contain" />,
   },
 ];
 
