@@ -13,6 +13,7 @@ export function Header({ theme, toggleTheme }: HeaderProps) {
 
   const navLinks = [
     { label: "About me", to: "/" },
+    { label: "Services", to: "/services" },
     { label: "Publications", to: "/publications" },
   ];
 
@@ -105,7 +106,9 @@ export function Header({ theme, toggleTheme }: HeaderProps) {
               ))}
 
               <a
-                href="#"
+                href="/cv.pdf"
+                target="_blank"
+                rel="noreferrer"
                 className="flex items-center gap-2 px-4 py-2.5 bg-[#0B0B0C] dark:bg-[#F5F5F5] text-[#F5F5F5] dark:text-[#0B0B0C] hover:bg-[#E11D48] dark:hover:bg-[#E11D48] dark:hover:text-[#F5F5F5] transition-colors text-sm rounded-lg justify-center"
               >
                 <Download size={16} />

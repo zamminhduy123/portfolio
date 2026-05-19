@@ -7,6 +7,7 @@ import { GrainTexture } from '@/components/GrainTexture';
 
 import HomePage from '@/pages/HomePage';
 import ResearchScroll from '@/pages/PublicationsPage';
+import LandingPageServicesPage from '@/pages/LandingPageServicesPage';
 import { pageview } from "./ga";
 import { useLocation } from "react-router-dom";
 
@@ -38,6 +39,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/publications" element={<ResearchScroll />} />
+          <Route path="/services" element={<LandingPageServicesPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
 
