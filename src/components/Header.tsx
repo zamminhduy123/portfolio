@@ -15,6 +15,7 @@ export function Header({ theme, toggleTheme }: HeaderProps) {
     { label: "About me", to: "/" },
     { label: "Services", to: "/services" },
     { label: "Publications", to: "/publications" },
+    { label: "Learnings", to: "/learnings" },
   ];
 
   const linkBase =
