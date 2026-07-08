@@ -38,7 +38,7 @@ const experiences: Experience[] = [
         current: false,
         description: "Deliver over 15+ features for Zalo PC application used by 8M+ users. Incharge of redesigning the core architecture to improve performance and maintainability of search and user related features.",
         skills: ["React", "ElectronJS", "Typescript/Javascript"],
-        imgSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Icon_of_Zalo.svg/1024px-Icon_of_Zalo.svg.png"
+        imgSrc: "./Icon_of_Zalo.webp"
     },
     {
         id: "3",
